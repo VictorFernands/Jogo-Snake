@@ -22,3 +22,8 @@ try:
     controls['PAUSE'] = pygame.key.key_code(config.get('Controls', 'pause', fallback='enter'))
 except:
     controls = {'UP': pygame.K_w, 'DOWN': pygame.K_s, 'LEFT': pygame.K_a, 'RIGHT': pygame.K_d, 'PAUSE': pygame.K_RETURN}
+
+pygame.init()
+flags = pygame.FULLSCREEN | pygame.SCALED if FULLSCREEN else 0
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags)
+clock = pygame.time.Clock()
