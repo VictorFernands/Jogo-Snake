@@ -27,3 +27,9 @@ pygame.init()
 flags = pygame.FULLSCREEN | pygame.SCALED if FULLSCREEN else 0
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags)
 clock = pygame.time.Clock()
+
+snake = [(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)]
+direction = 'RIGHT'
+block_size = 20
+food = (random.randint(0, SCREEN_WIDTH // block_size - 1) * block_size,
+        random.randint(0, SCREEN_HEIGHT // block_size - 1) * block_size)
