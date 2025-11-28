@@ -5,6 +5,7 @@ import os
 import configparser
 import random
 
+# Carregar configuração
 CONFIG_FILE = os.path.join('conf', 'conf.ini')
 config = configparser.ConfigParser()
 controls = {}
@@ -57,4 +58,23 @@ while running:
     if direction == 'LEFT': head_x -= block_size
     if direction == 'RIGHT': head_x += block_size
 
-    
+    new_head = (head_x, head_y)
+    if head_x < 0 or head_x >= SCREEN_WIDTH or head_y < 0 or head_y >= SCREEN_HEIGHT or new_head in snake:
+        running = False
+    else:
+        snake.insert(0, new_head)
+        if new_head == food:
+            food = (random.randint(0, SCREEN_WIDTH // block_size - 1) * block_size,
+                    random.randint(0, SCREEN_HEIGHT // block_size - 1) * block_size)
+        else:
+            snake.pop()
+
+    screen.fill((10, 10, 10))
+    for segment in snake:
+        pygame.draw.rect(screen, (0, 255, 0), (*segment, block_size, block_size))
+    pygame.draw.rect(screen, (255, 0, 0), (*food, block_size, block_size))
+    pygame.display.flip()
+    clock.tick(15)
+
+pygame.quit()
+sys.exit()
